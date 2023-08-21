@@ -12,9 +12,17 @@ const PizzaResponseSchema = z.object({
 const PizzaArraySchema = z.array(PizzaResponseSchema);
 type PizzaResponse = z.infer<typeof PizzaArraySchema>;
 
-let pizzaName: string[] = [];
+type PizzaName = {
+
+}
+
+var pizzaName:PizzaName[] = [{
+
+}]
+
 let pizzaPrice: number[] = [];
 let pizzaPiece: number[] = [];
+
 
 const pizzaFunction = async () => {
   const response = await http.get("http://localhost:3000/api/pizzas");
@@ -31,7 +39,8 @@ const pizzaFunction = async () => {
     pizzaNewName.innerHTML = [i + 1] + ". " + pizzaFromJson[i].name;
     pizzaNewName.setAttribute("id", "pizzaName" + [i]);
     (document.getElementById("pizza-section" + [i]) as HTMLElement).appendChild(pizzaNewName);
-    pizzaName.push(pizzaFromJson[i].name)
+        pizzaName.push(pizzaFromJson[i].name)
+        console.log("x"+pizzaName[1])
 
     let pizzaNewImage = document.createElement("img") as HTMLImageElement;
     pizzaNewImage.src = pizzaFromJson[i].link;
@@ -45,40 +54,19 @@ const pizzaFunction = async () => {
     pizzaNewPrice.innerHTML = "Price: " + pizzaFromJson[i].price;
     pizzaNewPrice.setAttribute("id", "pizzaPrice" + [i]);
     (document.getElementById("pizza-section" + [i]) as HTMLElement).appendChild(pizzaNewPrice);
-    pizzaPrice.push(+pizzaNewPrice.innerHTML);
+    pizzaPrice.push(+pizzaFromJson[i].price);
 
-    let pizzaNewPieceInput = document.createElement(
-      "input"
-    ) as HTMLInputElement;
+    let pizzaNewPieceInput = document.createElement( "input") as HTMLInputElement;
     pizzaNewPieceInput.setAttribute("type", "number");
     pizzaNewPieceInput.setAttribute("id", "pizzaPiece" + [i]);
-    (document.getElementById("pizza-section" + [i]) as HTMLElement).appendChild(
-      pizzaNewPieceInput
-    );
-    pizzaPiece.push(+pizzaNewPieceInput.innerHTML);
-
-    i++;
+    (document.getElementById("pizza-section" + [i]) as HTMLElement).appendChild( pizzaNewPieceInput );
+     i++;
   }
 };
 
 pizzaFunction();
 
-console.log(pizzaName.at(0));
-
-const pizzaOneName = pizzaName[0];
-const pizzaTwoName = pizzaName[1];
-const pizzaThreeName = pizzaName[2];
-const pizzaFourName = pizzaName[3];
-const pizzaFiveName = pizzaName[4];
-const pizzaSixName = pizzaName[5];
-const pizzaSevenName = pizzaName[6];
-const pizzaOnePrice = pizzaPrice[0];
-const pizzaTwoPrice = pizzaPrice[1];
-const pizzaThreePrice = pizzaPrice[2];
-const pizzaFourPrice = pizzaPrice[3];
-const pizzaFivePrice = pizzaPrice[4];
-const pizzaSixPrice = pizzaPrice[5];
-const pizzaSevenPrice = pizzaPrice[6];
+console.log("y"+pizzaName[1])
 
 const customerName = document.getElementById("name")! as HTMLInputElement;
 const customerZipCode = document.getElementById("zipcode")! as HTMLInputElement;
@@ -91,27 +79,8 @@ const customerEmail = document.getElementById("email")! as HTMLInputElement;
 const customerPhoneNumber = document.getElementById(
   "phone"
 )! as HTMLInputElement;
-const pizzaOneCount = document.getElementById(
-  "pizzaPiece0"
-)! as HTMLInputElement;
-const pizzaTwoCount = document.getElementById(
-  "pizzaPiece1"
-)! as HTMLInputElement;
-const pizzaThreeCount = document.getElementById(
-  "pizzaPiece2"
-)! as HTMLInputElement;
-const pizzaFourCount = document.getElementById(
-  "pizzaPiece3"
-)! as HTMLInputElement;
-const pizzaFiveCount = document.getElementById(
-  "pizzaPiece4"
-)! as HTMLInputElement;
-const pizzaSixCount = document.getElementById(
-  "pizzaPiece5"
-)! as HTMLInputElement;
-const pizzaSevenCount = document.getElementById(
-  "pizzaPiece6"
-)! as HTMLInputElement;
+
+
 
 const CustomerSchema = z.object({
   name: z.string(),
@@ -127,8 +96,8 @@ type Customer = z.infer<typeof CustomerSchema>;
 
 const PizzaSchema = z.object({
   pizzaname: z.string(),
-  piece: z.string(),
-  price: z.string(),
+  piece: z.number(),
+  price: z.number(),
 });
 
 type Pizza = z.infer<typeof PizzaSchema>;
@@ -172,65 +141,78 @@ document.getElementById("addtoorder")!.addEventListener("click", () => {
 
   document.getElementById("outname")!.textContent = customerData.name;
   document.getElementById("outaddress")!.textContent =
-    customerData.zipcode +
-    " " +
-    customerData.city +
-    " " +
-    customerData.street +
-    " " +
-    customerData.house;
+    customerData.zipcode +    " " +    customerData.city +    " " +    customerData.street +    " " +    customerData.house;
   document.getElementById("outemail")!.textContent = customerData.email;
   document.getElementById("outphone")!.textContent = customerData.phone;
 
+
+
+
+  let j = 0
+  let pizzaPieces:number[]=[]
+  while(j<7){
+  pizzaPieces.push(+(document.getElementById("pizzaPiece"+[j]) as HTMLInputElement).value)
+  j++
+  }
+  console.log(pizzaPieces)
+
+
   const pizzaOrder: Pizza[] = [
     {
-      pizzaname: "" + pizzaOneName,
-      piece: "" + pizzaOneCount,
-      price: "" + pizzaOnePrice,
+      pizzaname: "" + pizzaName[1],
+      piece: + pizzaPieces[0],
+      price: + pizzaPrice[0],
     },
     {
-      pizzaname: "" + pizzaTwoName,
-      piece: "" + pizzaTwoCount,
-      price: "" + pizzaTwoPrice,
+      pizzaname: "" + pizzaName[2],
+      piece: + pizzaPieces[1],
+      price:+ pizzaPrice[1],
     },
     {
-      pizzaname: "" + pizzaThreeName,
-      piece: "" + pizzaThreeCount,
-      price: "" + pizzaThreePrice,
+      pizzaname: "" + pizzaName[3],
+      piece: +pizzaPieces[2],
+      price: + pizzaPrice[2],
     },
     {
-      pizzaname: "" + pizzaFourName,
-      piece: "" + pizzaFourCount,
-      price: "" + pizzaFourPrice,
+      pizzaname: "" + pizzaName[4],
+      piece: +pizzaPieces[3],
+      price:+ pizzaPrice[3],
     },
     {
-      pizzaname: "" + pizzaFiveName,
-      piece: "" + pizzaFiveCount,
-      price: "" + pizzaFivePrice,
+      pizzaname: "" + pizzaName[5],
+      piece:+ pizzaPieces[4],
+      price: + pizzaPrice[4],
     },
     {
-      pizzaname: "" + pizzaSixName,
-      piece: "" + pizzaSixCount,
-      price: "" + pizzaSixPrice,
+      pizzaname: "" + pizzaName[6],
+      piece: + pizzaPieces[5],
+      price: +pizzaPrice[5],
     },
     {
-      pizzaname: "" + pizzaSevenName,
-      piece: "" + pizzaSevenCount,
-      price: "" + pizzaSevenPrice,
+      pizzaname: "" + pizzaName[7],
+      piece:+ pizzaPieces[6],
+      price: + pizzaPrice[6],
     },
   ];
 
+console.log(pizzaOrder)
+
   pizzaOrder.forEach((pizzaData) => {
-    const count = parseInt(pizzaData.piece);
+
+
+    const count = pizzaData.piece;
     if (count > 0) {
-      const multiply = count * parseInt(pizzaData.price);
-      const nameElement = document.createElement("h2");
+      let multiply = count * pizzaData.price;
+      let nameElement = document.createElement("h2");
+  
       nameElement.textContent = pizzaData.pizzaname;
       document.getElementById("pizzaordername")!.appendChild(nameElement);
-      const pieceElement = document.createElement("h2");
+      let pieceElement = document.createElement("h2");
+
       pieceElement.textContent = pizzaData.piece + " pc";
       document.getElementById("pizzaorderpiece")!.appendChild(pieceElement);
-      const priceElement = document.createElement("h2");
+      let priceElement = document.createElement("h2");
+
       priceElement.textContent = multiply.toString() + " Ft";
       document.getElementById("pizzaorderprice")!.appendChild(priceElement);
 
