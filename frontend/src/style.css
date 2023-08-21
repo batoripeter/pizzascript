@@ -17,3 +17,31 @@ img {
 span {
   font-weight: bold;
 }
+
+#form-address{
+  margin:20px;
+}
+
+#form-contact {
+  margin:20px;
+}
+
+
+#form-name {
+  margin:20px;
+}
+
+
+#pizzasection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 30px;
+}
+.pizzabox {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+padding: 20px;
+max-width: 25%;
+}
