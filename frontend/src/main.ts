@@ -144,6 +144,12 @@ document.getElementById("addtoorder")!.addEventListener("click", () => {
     customerData.zipcode +    " " +    customerData.city +    " " +    customerData.street +    " " +    customerData.house;
   document.getElementById("outemail")!.textContent = customerData.email;
   document.getElementById("outphone")!.textContent = customerData.phone;
+  document.getElementById("pizzaordername")!.innerHTML=""
+  document.getElementById("pizzaorderpiece")!.innerHTML=""
+  document.getElementById("pizzaorderprice")!.innerHTML=""
+  document.getElementById("totalprice")!.innerHTML=""
+
+
 
 
 
@@ -198,31 +204,32 @@ document.getElementById("addtoorder")!.addEventListener("click", () => {
 console.log(pizzaOrder)
 
   pizzaOrder.forEach((pizzaData) => {
-
-
+    
+ 
     const count = pizzaData.piece;
     if (count > 0) {
       let multiply = count * pizzaData.price;
+
       let nameElement = document.createElement("h2");
-  
       nameElement.textContent = pizzaData.pizzaname;
       document.getElementById("pizzaordername")!.appendChild(nameElement);
+
       let pieceElement = document.createElement("h2");
-
       pieceElement.textContent = pizzaData.piece + " pc";
-      document.getElementById("pizzaorderpiece")!.appendChild(pieceElement);
-      let priceElement = document.createElement("h2");
+       document.getElementById("pizzaorderpiece")!.appendChild(pieceElement);
 
+      let priceElement = document.createElement("h2");
       priceElement.textContent = multiply.toString() + " Ft";
       document.getElementById("pizzaorderprice")!.appendChild(priceElement);
 
+      
       let newOrder = {
         pizzaname: pizzaData.pizzaname,
         piece: pizzaData.piece,
         price: pizzaData.price,
       };
       pizzaOrders.push(newOrder);
-
+      amountArray= []
       amountArray.push(multiply);
     }
   });
@@ -236,6 +243,7 @@ console.log(pizzaOrder)
   }
 
   priceSum = sumAmountArray(amountArray);
+
 
   if (priceSum !== 0) {
     const totalPriceElement = document.createElement("h2");
