@@ -92,7 +92,7 @@ const renderSelected = (pizza: Pizza) => {
     <div>
       <h1>${pizza.name}</h1>
       <p>${pizza.toppings}</p>
-      <img src="${pizza.url}" width="300px"/>
+      <img src="${pizza.url}" class="h-80 w-80" style="object-fit: cover">
       <input type="number" id="amount" class="text-black" />
       <button id="add" >Add to order</button>
     </div>
@@ -108,12 +108,12 @@ const renderOrder = (order: Order) => {
       <h1>Your order</h1>
       ${order.items.map(item => `
         <div class="flex">
-        <p>${item.amount} x ${pizzas.find(pizza => pizza.id === item.id)!.name}</p>
-        <button id="remove" class="mx-3 px-2 bg-red-800">Remove from order</button>
+        <p class="p-2">${item.amount} x ${pizzas.find(pizza => pizza.id === item.id)!.name}</p>
+        <button id="remove" class="m-1 p-1 bg-red-800">Remove from order</button>
         </div>
       `).join(" ")}
-      <input placeholder="Name" id="orderName" class="text-black" value="${order.name}">
-      <input placeholder="Zip code" class="text-black" id="zipCode" value="${order.zipCode}">
+      <input placeholder="Name" id="orderName" class="text-black m-3" value="${order.name}" type="text">
+      <input placeholder="Zip code" class="text-black m-3" id="zipCode" value="${order.zipCode}" type="number">
       <button id="sendOrder">Send order</button>
     </div>
   `
