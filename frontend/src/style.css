@@ -40,8 +40,8 @@ video {
 /* --- Variables --- */
 
 body {
-  /* background-image: url(https://static.vecteezy.com/system/resources/previews/000/966/017/original/various-pizzas-set-vector.jpg); */
-  background-image: url(https://pixy.org/download/800846/);
+ 
+  background-image: url(https://ocdn.eu/images/pulscms/ZDI7MDA_/3f41971ddf81f6aaf119eb03d206210e.jpg);
   
   background-position: center left;
   background-color: whitesmoke;
@@ -105,7 +105,7 @@ h1 {
 }
 #list p{
   font-family: 'Kosugi Maru', sans-serif;
-  margin: 20px;
+  margin: 10px;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 2px;

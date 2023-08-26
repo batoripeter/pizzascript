@@ -47,7 +47,7 @@
 },{
 
     "id":7,
-    "name":"neapoiltan",
+    "name":"neapolitan",
     "toppings": ["tomato sauce","tomato","garlic","olive oil","basil","mozzarella"],
     "url": "http://localhost:3333/pictures/all-pizza.jpeg"
 
